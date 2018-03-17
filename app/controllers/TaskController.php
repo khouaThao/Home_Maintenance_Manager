@@ -11,7 +11,7 @@ class TaskController extends Controller {
     public function index($applianceId = 0, $propertyNum = 0) {
         $this->notSignedIn();        
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $taskManagement->addTask();
+            $this->taskManagement->addTask();
         }
         $_SESSION['outputCotent'] = $taskManagement->getListOfTasks($applianceId); 
         $this->view("list-task-page", ["appId" => $applianceId, "proNum" => $propertyNum]);
@@ -21,7 +21,7 @@ class TaskController extends Controller {
         $this->notSignedIn();
         $this->view("add-task-page", ["appId" => $applianceId, "proNum" => $propertyNum]);
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $taskManagement->addTask();
+            $this->taskManagement->addTask();
         }
     }
 
@@ -31,7 +31,7 @@ class TaskController extends Controller {
 
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $taskID = $_SESSION['taskid' . $taskNum];
-            $taskManagement->updateTask($taskID);
+            $this->taskManagement->updateTask($taskID);
         }
     }
 
@@ -47,7 +47,7 @@ class TaskController extends Controller {
 
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $taskID = $_SESSION['taskid' . $taskNum];
-            $taskManagement->updateTask($taskID);
+            $this->taskManagement->updateTask($taskID);
         }
     }
 }

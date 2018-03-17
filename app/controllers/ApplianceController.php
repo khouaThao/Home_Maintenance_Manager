@@ -11,7 +11,7 @@ class ApplianceController extends Controller {
         $this->notSignedIn();
 
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $appManagement->addAppliance();
+            $this->appManagement->addAppliance();
         }
         $_SESSION['outputCotent'] = $appManagement->getListOfAppliances($propertyId); 
 
@@ -23,7 +23,7 @@ class ApplianceController extends Controller {
         $this->view("add-appliance-page", ["proId" => $propertyId]);
 
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $appManagement->addAppliance();
+            $this->appManagement->addAppliance();
         }
     }
 
@@ -42,7 +42,7 @@ class ApplianceController extends Controller {
         $applianceID = $_SESSION['applianceid' . $applianceNum];
         $applianceName = $_SESSION['appliancename' . $applianceNum];
 
-        $appManagement->updateAppliance($applianceID, $applianceName);
+        $this->appManagement->updateAppliance($applianceID, $applianceName);
         }
     }
 
