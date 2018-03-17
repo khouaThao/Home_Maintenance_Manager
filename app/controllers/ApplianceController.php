@@ -5,13 +5,14 @@
  * Date:
  */
 class ApplianceController extends Controller {
-    $appManagement =  $this->model->getApplianceManagement();
     
     public function index ($propertyId = 0){
         $this->notSignedIn();
 
+        $appManagement = $this->model->getApplianceManagement();
+
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->appManagement->addAppliance();
+            $appManagement->addAppliance();
         }
         $_SESSION['outputCotent'] = $appManagement->getListOfAppliances($propertyId); 
 
@@ -21,14 +22,11 @@ class ApplianceController extends Controller {
     public function add($propertyId = 0) {
         $this->notSignedIn();
         $this->view("add-appliance-page", ["proId" => $propertyId]);
-
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->appManagement->addAppliance();
-        }
     }
 
     public function update($applianceNum = 0) {
         $this->notSignedIn();
+        $appManagement=$this->model->getApplianceManagement();
 
         $this->view("update-appliance-page", ["an" => $applianceNum]);
 
@@ -42,12 +40,13 @@ class ApplianceController extends Controller {
         $applianceID = $_SESSION['applianceid' . $applianceNum];
         $applianceName = $_SESSION['appliancename' . $applianceNum];
 
-        $this->appManagement->updateAppliance($applianceID, $applianceName);
+        $appManagement->updateAppliance($applianceID, $applianceName);
         }
     }
 
     public function delete($applianceNum = 0) {
         $this->notSignedIn();
+        $appManagement=$this->model->getApplianceManagement();
         $this->view("delete-appliance-page", ["an" => $applianceNum]);
     }
 

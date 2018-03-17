@@ -6,11 +6,10 @@
  */
 class PropertyController extends Controller {
 
-    $proManagement =  $this->model->getPropertyManagement();
-
     public function index ($userId = 0){
         
         $this->notSignedIn();
+        $proManagement = $this->model->getPropertyManagement();
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $this->proManagement->addProperty();
         }
@@ -20,15 +19,14 @@ class PropertyController extends Controller {
 
     public function add($userId = 0) {
         $this->notSignedIn();
+
         $this->view("add-property-page", ["uId" => $userId]);
 
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->proManagement->addProperty();
-        }
     }
 
     public function update($propertyNum = 0) {
         $this->notSignedIn();
+        $proManagement = $this->model->getPropertyManagement();
         $this->view("update-property-page", ["pn" => $propertyNum]);
 
         /**
@@ -47,6 +45,7 @@ class PropertyController extends Controller {
 
     public function delete($propertyNum = 0) {
         $this->notSignedIn();
+        $proManagement = $this->model->getPropertyManagement();
         $this->view("delete-property-page", ["pn" => $propertyNum]);
     }
 }
