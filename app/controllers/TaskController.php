@@ -36,4 +36,14 @@ class TaskController extends Controller {
         $this->view("delete-task-page", ["tn" => $taskNum]);
     }
 
+    //list all task of user regardless of property
+    public function listAll($userId = 0) {
+        $this->notSignedIn();
+        $this->view("listAll-task-page", ["tn" => $taskNum]);
+
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $taskID = $_SESSION['taskid' . $taskNum];
+            $task->updateTask($taskID);
+        }
+    }
 }
